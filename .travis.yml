@@ -2,6 +2,6 @@ language: python
 python:
 - '3.6'
 install:
-- pip install ansible==2.3.0 molecule apache-libcloud
+- pip install ansible==2.3.0 molecule-2.12 apache-libcloud
 before_install:
   - touch test
