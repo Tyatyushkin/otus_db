@@ -3,15 +3,17 @@ python:
 - '2.7'
 install:
 - pip install ansible==2.3.0 molecule==2.14 apache-libcloud Jinja2==2.10 PyYAML==3.12
-before_install:
-- sudo apt install openssl -y
-- openssl aes-256-cbc -K $encrypted_3b9f0b9d36d1_key -iv $encrypted_3b9f0b9d36d1_iv -in secrets.tar.enc -out secrets.tar -d
-- touch test
-- tar xvf secrets.tar
-- mv google_compute_engine /home/travis/.ssh/
-- chmod 0600 /home/travis/.ssh/google_compute_engin
+
 env:
+  matrix:
+  - GCE_CREDENTIALS_FILE="$(pwd)/credentials.json
   global:
   - secure: lByr2dTQXHEuM/83AotsFAeJLO2Kuykdsy1/dmXtDKDxQLpO+KVAIYXjvgO7XqZj8OX8PHUuQlWIDoTiMUoNiogWSOf3TT8XoO1NZrEJl42Gxwmgl9JTxlR0OfFc9fHKFum7G7pWina3iRls6iDQFFbm3Awk8RT/okD7eC6zkEFR/SYsqIxvTzY0NBLqe0yb655pTPSAXZcN0un6+L6zUY1pkBPxmo7MDnVFCFrHX6SBXNkLf02EjXq6pPlcYTF654AL1yWDVRkengXNcwarWiri6LHCXho/lJm2gKum4aDveH/+w/FS8wWkkpLzVM+hUT4s2lZdOTKSCv2HA2mmSXAzcOAweBBYY2uS+vizRnRRhQkU7CndluofXBMSDGaipzLxxRzftSKVMxgrxxfhQE9Htd/SChMdkphvrgb+1nfm9apB0vccGX6li5SAOwEPBY3s58AmLnz4r0hS8nXcSGcBukVpUH21FQ3n6gnRdm3QSIrkVw+UQ7zxydYaGB483iK891QHJpyFaLFqA+9oGYd+LgxlEiP7zIpS5sKha4I9db9eO0i7QkYkx7di1JfYwRMV48H8peFz1iGlUpj17ezd+pTVLSm4aBo1H6uDUGcZvGSrAeu6KK7aRGssG+8odALCilQI+/8HSfcC6qx7wgzCKPrD5OVqu726c5hov0c=
   - secure: 25tUxmuRgmRVJyFLqO8uiYBr0XUWm6jprWWkMNi3xhFc2QqOl8mROfqeNSVALCez4szcpUJyCnpCO8N85u9y3bzKRmYiAuTTQ/B6goo5WlqHzYhxxKKscZY+mDcCz905IQAgCEw5SN03DDcl+3oM+aMxWIw0umbmvayopqUtY+jFnIyl4mRMDYkWac6I0hwYI/6torMldUAYXxNKyQr2OVFFwjLT7iEAJk0lqzbtjfwFUW1R/iPKjcs+pYQ/2vLdAGQ4Qkkv2XCYL+bSYiq6+ytln5HzudZ4Hy/kHIe2RlwZGu0oc+b6QSlHfGhECUWIEsEBU5QdjLeEktdgK2eNXt/BnQYMClXeXfFf1XJMCn0fCn2/cVvue/wFzaJCHbP6TehEhfXecTbt5mVo/+9Xt3cQbGVTaufGyGyG4zeC+gglNKAF2cCMj6RiPtj5UfNYDizko/MhJqICXO7v1x9+Dv/G8UYWWAOLAXDG8jF+rKPrNylHlL2fFHfxyc4zej+mWeqn33Nsm4UhZcgZcpcWWfINrQM7aredVB0vTLrUflAgYPxqHamRIm1StAHck2tyWmugcF5qB2I8G0XskCZiJ8VLqsio5PWZWger0yi36KADCKsrzAreIHzDkL//KPdqf94/kFEbQ17fZc0r6T03ItLA6mYA2zjFiphKyCuDdbw=
   - secure: hsArL2CZ0d0qiAlzMi7vqNGBnzxN2hA45Dv5oWRzDtEeCsnwVYD/VOpVCnkA4Yl3O6NZ3frbWbdzPvFGIOIKLxruQMaQz+0frINXn1HVAp+r+xFJdIGw6qFHbvAPa6AYxRYWuNpuaj2phzH2/dcnGjyXLXOHp6DrcZTJkGsC8tReC4dxtShQ2qc20c74CrQJAVe+FkTO2MQMXiZcvI9CLa5gwUF9gNZM0lmPw7s2sxeXnH4gW3y3JXfFurXxD/lQIW8Y7RIBOI4FgxUdpGPxPNLzxTySPuuaS6uanoi/Y+pPiAyymh9L9K4hAreIOHXgQwLYD+xH/s1Fb7cp9tt49SvF11OIaidVCmCjw8pkUo10ySJKX9UqbKnBDISo5mhPq3dH2bUE+fDsRMQO4Wfie7i/uJw5JZG/r3/VGGCxYM9O1rZXCYs/b8dBUsmwfgNH1vYEr/OpxXz2kfizjGOASo2TzYBCrmXQkPARlK0mP5cRuXB/ZijZx7RHTDiI6KYJUHUvYpT1cYyE0R4y5mcLE/AP90PhBwY5rXOhymvJax3X9UZeVOip9x/8lG101R57GQQQr9oH5xrppg9M2u7m7Ej7Rwjh3iS8/If6pBd+KMT+7KBO0pMBsoBpLSZaKSf/lAg2q7qeqBGTbI8MKC9TvCK7f/wJ2DpLgpI8yAiz9eM=
+before_install:
+- openssl aes-256-cbc -K $encrypted_3b9f0b9d36d1_key -iv $encrypted_3b9f0b9d36d1_iv -in secrets.tar.enc -out secrets.tar -d
+- touch test
+- tar xvf secrets.tar
+- mv google_compute_engine /home/travis/.ssh/
+- chmod 0600 /home/travis/.ssh/google_compute_engine
