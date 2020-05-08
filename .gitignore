@@ -3,3 +3,8 @@
 *.pub
 credentials.json
 google_compute_engine
+.vagrant
+*.pyc
+.molecule
+.cache
+.pytest_cache
